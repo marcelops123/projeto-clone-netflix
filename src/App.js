@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable import/no-anonymous-default-export */
+import React, { useEffect, useState } from 'react';
+import Tmdb from './Tmdb';
+import MovieRow from './components/MovieRow';
+import './App.css'
+import FeaturedMovie from './components/FeaturedMovie';
+export default () => {
+   
+   const [moviteList, setMovieList] = useState([]);
+   const [featuredData, setFeaturedData] = useState(null)
+   
+   
+    useEffect(() => {
+       const loadAll = async () => {
+        let list = await Tmdb.getHomeList();
+        setMovieList(list)
+       
+        let originals = list.filter(i=>i.slug === 'originals');
+        let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length -1));
+        let chosen = originals[0].items.results[randomChosen]
+        let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
+        setFeaturedData(chosenInfo);
+        
+    }
+   loadAll();
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  },  []);
+
+    return (
+        <div className="page">
+            {featuredData &&
+            <FeaturedMovie item={featuredData} />
+}
+           <section className="lists">
+                {moviteList.map((item, key)=>(
+            <div>
+              <MovieRow key={key} title={item.title} items={item.items}/>
+            </div>
+                ))}
+           </section>
+           
+        </div>
+    );
 }
 
-export default App;
