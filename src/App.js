@@ -62,7 +62,7 @@ import Header from './components/Header';
            </section>
            {moviteList.length <=0 &&
            <div className='loading'>
-               <img src='https://66.media.tumblr.com/5bf8ba688ff3553b900a40dad2bbc1e0/tumblr_inline_p7qvpcxHIr1seki23_500.gif'/>
+               <img src='https://66.media.tumblr.com/5bf8ba688ff3553b900a40dad2bbc1e0/tumblr_inline_p7qvpcxHIr1seki23_500.gif' alt='Carregando!'/>
            </div>
     }
         </div>
