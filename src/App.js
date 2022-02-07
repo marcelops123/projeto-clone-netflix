@@ -4,10 +4,14 @@ import Tmdb from './Tmdb';
 import MovieRow from './components/MovieRow';
 import './App.css'
 import FeaturedMovie from './components/FeaturedMovie';
-export default () => {
+import Header from './components/Header';
+
+
+    export default () => {
    
    const [moviteList, setMovieList] = useState([]);
-   const [featuredData, setFeaturedData] = useState(null)
+   const [featuredData, setFeaturedData] = useState(null);
+   const [blackHeader, setBlackHeader] = useState(false);
    
    
     useEffect(() => {
@@ -26,8 +30,26 @@ export default () => {
 
   },  []);
 
+  useEffect(()=>{
+      const scrollListener = () => {
+          if(window.scrollY > 10) {
+              setBlackHeader(true)
+          } else {
+              setBlackHeader(false);
+          }
+        }
+          window.addEventListener('scroll', scrollListener);
+          return () => {
+              window.removeEventListener('scroll', scrollListener)
+          }
+      
+  }, []);
+
     return (
         <div className="page">
+
+            <Header black={blackHeader} />
+
             {featuredData &&
             <FeaturedMovie item={featuredData} />
 }
@@ -38,7 +60,11 @@ export default () => {
             </div>
                 ))}
            </section>
-           
+           {moviteList.length <=0 &&
+           <div className='loading'>
+               <img src='https://66.media.tumblr.com/5bf8ba688ff3553b900a40dad2bbc1e0/tumblr_inline_p7qvpcxHIr1seki23_500.gif'/>
+           </div>
+    }
         </div>
     );
 }
