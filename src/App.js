@@ -54,11 +54,11 @@ import Header from './components/Header';
             <FeaturedMovie item={featuredData} />
 }
            <section className="lists">
-                {moviteList.map((item, key)=>(
-            <div>
-              <MovieRow key={key} title={item.title} items={item.items}/>
-            </div>
-                ))}
+                    {moviteList.map((item, key)=>(
+                <div>
+                <MovieRow key={key} title={item.title} items={item.items}/>
+                </div>
+                    ))}
            </section>
            {moviteList.length <=0 &&
            <div className='loading'>
