@@ -14,7 +14,7 @@ export default ({black}) => {
             </div>
             <div className='header--user'>
             <a href='/'>
-                <img src='https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png' alt='Usuário'/>
+                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzfWu5P3XRq40XTOquHgtUR_TZ63XAu2hvQQ&usqp=CAU' alt='Usuário'/>
             </a>
 
                 </div>
